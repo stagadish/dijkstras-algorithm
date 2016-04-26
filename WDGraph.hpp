@@ -70,6 +70,13 @@ public:
     // return: True if the edge was added between the two vertices. False otherwise.
     bool AddEdge(const Comparable &lhs, const Comparable &rhs, double weight);
     
+    // Get the weight value between two vertices in the graph.
+    // param lhs: the 'from' vertex value.
+    // param rhs: the 'to' vertex value.
+    // return a positive double value if a and edge exists between the two vertices.
+    // -1 otherwise. Remember, no negative weights are allowed.
+    double GetWeightBetween(const Comparable &lhs, const Comparable &rhs) const;
+    
     // return the size of the graph (i.e. num of vertices)
     size_t Size() const { return vertices_.size(); }
     

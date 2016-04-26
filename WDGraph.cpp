@@ -51,12 +51,23 @@ bool WDGraph<Comparable>::AddEdge(const Comparable &lhs, const Comparable &rhs, 
     else {
         if (ContainsVertex(lhs) && ContainsVertex(rhs)) {
             auto fetchVertex = vertices_.find(lhs);
-            std::pair<Comparable, std::pair<Comparable, double>> insertEdge(rhs, std::pair<Comparable, double>(rhs, weight));
-            fetchVertex->second.adj_l.insert(insertEdge);
+            std::pair<Comparable, std::pair<Comparable, double>> edgeToInsert(rhs, std::pair<Comparable, double>(rhs, weight));
+            fetchVertex->second.adj_l.insert(edgeToInsert);
             return true;
         } else
             return false;
     }
+}
+
+template <typename Comparable>
+double WDGraph<Comparable>::GetWeightBetween(const Comparable &lhs, const Comparable &rhs) const {
+    if (ContainsVertex(lhs) && ContainsVertex(rhs)) {
+        if (ContainsEdge(lhs, rhs)) {
+            return vertices_.find(lhs)->second.adj_l.find(rhs)->second.second;
+        } else
+            return -1;
+    } else
+        return -1;
 }
 
 template <typename Comparable>
