@@ -130,4 +130,5 @@ public:
     
 };
 
+#include "WDGraph.cpp"
 #endif /* _WDGRAPH_H_ */

@@ -7,7 +7,7 @@
 //  Copyright © 2016 Gil Dekel. All rights reserved.
 //
 
-#include "WDGraph.cpp"
+#include "WDGraph.hpp"
 
 #include <iostream>
 #include <fstream>
