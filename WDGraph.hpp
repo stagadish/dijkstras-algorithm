@@ -3,7 +3,7 @@
 //  dijkstras-algorithm-xcode
 //
 //  Created by Gil Dekel on 4/26/16.
-//  Last updated by Gil Dekel on 4/26/16.
+//  Last updated by Gil Dekel on 4/27/16.
 //  Copyright © 2016 Gil Dekel. All rights reserved.
 //
 
@@ -11,6 +11,7 @@
 #define _WDGRAPH_H_
 
 #include <iostream>
+#include <vector>
 #include <limits>           // std::numeric_limits
 #include <queue>            // std::priority_queue
 #include <unordered_map>
@@ -37,27 +38,30 @@ private:
     // Key is the value of the neighbor vertices, and value is the edge's weight.
     struct Vertex {
         Comparable val;
-        Comparable path;
+        Vertex* path;
         double dist;
         bool known;
         std::unordered_map<Comparable, double> adj_l;
         
-        Vertex() : dist(0.0), known(false) {}
-        Vertex(Comparable nuVal, double nuDist = 0.0, bool state = false)
-            : val(nuVal), dist(nuDist), known(state) {}
+        Vertex() : path(nullptr), dist(0.0), known(false) {}
+        Vertex(Comparable nuVal) : val(nuVal), path(nullptr), dist(0.0), known(false) {}
     };
     
     // Comparison class (struct) for the priority queue.
-    struct CompareDist
-    {
-        bool operator()(Vertex const& n1, Vertex const& n2)
-        {
-            return (n1.dist < n2.dist);
+    struct CompareByDist {
+        bool operator()(const Vertex *v1, const Vertex *v2) const {
+        
+            return (v1->dist > v2->dist);
         }
     };
     
     // The set of vertices searchable by their values.
     std::unordered_map<Comparable, Vertex> vertices_;
+
+    // Print the shortest path of the given vertex to the
+    // origin, calculated in the last run of DijkstrasShortestPath().
+    // param vertex: a pointer to the destiny vertex.
+    void PrintShortestPathOf(const Vertex *v) const;
     
 public:
     // Using default ctors, assignment operators and destructor.
@@ -105,6 +109,17 @@ public:
     // number of vertices in the graph.
     // param start: the origin vertex.
     bool DijkstrasShortestPath(const Comparable &start);
+    
+    // Print the shortest path of the given vertex to the
+    // origin, calculated in the last run of DijkstrasShortestPath().
+    // param vertex: the destiny vertex.
+    void PrintShortestPathOf(const Comparable vertexVal) const;
+    
+    // Get the current cost/distance of a vertex to the
+    // origin, calculated in the last run of DijkstrasShortestPath().
+    // param vertex: the destiny vertex.
+    // return the vertex's dist value. -1 if the value is not in the graph.
+    double GetCostOf(const Comparable &val);
     
     // return the size of the graph (i.e. num of vertices)
     size_t Size() const { return vertices_.size(); }
