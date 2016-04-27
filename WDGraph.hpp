@@ -11,6 +11,8 @@
 #define _WDGRAPH_H_
 
 #include <iostream>
+#include <limits>           // std::numeric_limits
+#include <queue>            // std::priority_queue
 #include <unordered_map>
 
 /*
@@ -24,14 +26,34 @@
  * 3) Weights are non-negative double values. The algorithm will fail if given
  *    negative weight values.
  */
+
+const double INF = std::numeric_limits<double>::infinity();     //define infinity
+
 template <typename Comparable>
 class WDGraph {
 private:
     // A vertex holds its value and an adjacency list to
     // represent edges to its neighbors.
+    // Key is the value of the neighbor vertices, and value is the edge's weight.
     struct Vertex {
         Comparable val;
-        std::unordered_map<Comparable, std::pair<Comparable, double>> adj_l;
+        Comparable path;
+        double dist;
+        bool known;
+        std::unordered_map<Comparable, double> adj_l;
+        
+        Vertex() : dist(0.0), known(false) {}
+        Vertex(Comparable nuVal, double nuDist = 0.0, bool state = false)
+            : val(nuVal), dist(nuDist), known(state) {}
+    };
+    
+    // Comparison class (struct) for the priority queue.
+    struct CompareDist
+    {
+        bool operator()(Vertex const& n1, Vertex const& n2)
+        {
+            return (n1.dist < n2.dist);
+        }
     };
     
     // The set of vertices searchable by their values.
@@ -76,6 +98,13 @@ public:
     // return a positive double value if a and edge exists between the two vertices.
     // -1 otherwise. Remember, no negative weights are allowed.
     double GetWeightBetween(const Comparable &lhs, const Comparable &rhs) const;
+    
+    // Find the shortest weighted path from one vertex to all the others.
+    // Done using Djikstra's algorithm, and breadth search first (priority queue).
+    // Complexity O(|E|log|V|), where |E| is the number of edges, and |V| is the
+    // number of vertices in the graph.
+    // param start: the origin vertex.
+    bool DijkstrasShortestPath(const Comparable &start);
     
     // return the size of the graph (i.e. num of vertices)
     size_t Size() const { return vertices_.size(); }

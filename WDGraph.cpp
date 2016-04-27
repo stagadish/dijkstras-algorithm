@@ -23,8 +23,7 @@ bool WDGraph<Comparable>::AddVertex(const Comparable &val) {
     if (ContainsVertex(val))
         return false;
     else {
-        Vertex newVertex;
-        newVertex.val = val;
+        Vertex newVertex(val);
         vertices_.insert(std::pair<Comparable, Vertex>(newVertex.val, newVertex));
         return true;
     }
@@ -51,8 +50,7 @@ bool WDGraph<Comparable>::AddEdge(const Comparable &lhs, const Comparable &rhs, 
     else {
         if (ContainsVertex(lhs) && ContainsVertex(rhs)) {
             auto fetchVertex = vertices_.find(lhs);
-            std::pair<Comparable, std::pair<Comparable, double>> edgeToInsert(rhs, std::pair<Comparable, double>(rhs, weight));
-            fetchVertex->second.adj_l.insert(edgeToInsert);
+            fetchVertex->second.adj_l.insert(std::pair<Comparable, double>(rhs, weight));
             return true;
         } else
             return false;
@@ -63,7 +61,7 @@ template <typename Comparable>
 double WDGraph<Comparable>::GetWeightBetween(const Comparable &lhs, const Comparable &rhs) const {
     if (ContainsVertex(lhs) && ContainsVertex(rhs)) {
         if (ContainsEdge(lhs, rhs)) {
-            return vertices_.find(lhs)->second.adj_l.find(rhs)->second.second;
+            return vertices_.find(lhs)->second.adj_l.find(rhs)->second;
         } else
             return -1;
     } else
@@ -71,11 +69,27 @@ double WDGraph<Comparable>::GetWeightBetween(const Comparable &lhs, const Compar
 }
 
 template <typename Comparable>
+bool WDGraph<Comparable>::DijkstrasShortestPath(const Comparable &start) {
+    std::priority_queue<Comparable> pq;
+    auto sVertex = vertices_.find(start);
+    if (sVertex == vertices_.end())     //check if the query is in the graph.
+        return false;
+    
+    for (auto v : vertices_) {
+        v.second.dist = INF;
+        v.second.known = false;
+    }
+    
+    sVertex->second.dist = 0;
+    
+}
+
+template <typename Comparable>
 void WDGraph<Comparable>::printGraph() const {
     for (auto verx : vertices_) {
         std::cout << "Vertex " << verx.second.val << " is connected to:\n";
         for (auto neighbor : verx.second.adj_l)
-            std::cout << "\t" << neighbor.first << ":" << neighbor.second.second << std::endl;
+            std::cout << "\t" << neighbor.first << ":" << neighbor.second << std::endl;
     }
 }
 
