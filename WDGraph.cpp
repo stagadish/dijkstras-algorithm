@@ -24,7 +24,7 @@ bool WDGraph<Comparable>::AddVertex(const Comparable &val) {
         return false;
     else {
         Vertex newVertex(val);
-        vertices_.insert(std::pair<Comparable, Vertex>(newVertex.val, newVertex));
+        vertices_.insert(std::pair<Comparable, Vertex>(newVertex.val, std::move(newVertex)));
         return true;
     }
 }
