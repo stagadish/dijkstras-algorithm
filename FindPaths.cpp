@@ -3,7 +3,7 @@
 //  dijkstras-algorithm-xcode
 //
 //  Created by Gil Dekel on 4/27/16.
-//  Last updated by Gil Dekel on 4/27/16.
+//  Last updated by Gil Dekel on 4/29/16.
 //  Copyright © 2016 Gil Dekel. All rights reserved.
 //
 
@@ -29,10 +29,10 @@ int main(int argc, char **argv) {
     WDGraph<int> testGraph = std::move(parseInputToGraph(argv[1]));
 //    testGraph.printGraph();
     
-    int starting_vertex = 0;
     // Try to translate STARTING_VERTEX to int in order to queue dijkstra's algorithm.
     try {
-        starting_vertex = std::stoi(argv[2]);
+        int starting_vertex = std::stoi(argv[2]);
+        
         if (testGraph.DijkstrasShortestPath(starting_vertex)) {
             for (int i = 1; i <= testGraph.Size(); ++i) {
                 if (i == starting_vertex) {
@@ -47,7 +47,7 @@ int main(int argc, char **argv) {
             std::cout << "Failed to execute Dijkstra's algorithm. " << starting_vertex << " is not in the graph.\n";
         
     } catch (std::invalid_argument) {
-        std::cout << "Invalid argument for STARTING_VERTEX::::TERMINATING PROGRAM\n";
+        std::cout << "Invalid argument for STARTING_VERTEX::Must be a positive integer::TERMINATING PROGRAM\n";
         exit(1);
     }
     return 0;

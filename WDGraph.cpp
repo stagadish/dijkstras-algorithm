@@ -3,7 +3,7 @@
 //  dijkstras-algorithm-xcode
 //
 //  Created by Gil Dekel on 4/26/16.
-//  Last updated by Gil Dekel on 4/27/16.
+//  Last updated by Gil Dekel on 4/29/16.
 //  Copyright © 2016 Gil Dekel. All rights reserved.
 //
 
@@ -11,8 +11,7 @@
 
 template <typename Comparable>
 bool WDGraph<Comparable>::ContainsVertex(const Comparable &val) const {
-    auto fetchVertex = vertices_.find(val);
-    if (fetchVertex == vertices_.end())
+    if (vertices_.find(val) == vertices_.end())
         return false;
     else
         return true;
@@ -23,8 +22,7 @@ bool WDGraph<Comparable>::AddVertex(const Comparable &val) {
     if (ContainsVertex(val))
         return false;
     else {
-        Vertex newVertex(val);
-        vertices_.insert(std::pair<Comparable, Vertex>(newVertex.val, std::move(newVertex)));
+        vertices_.insert(std::pair<Comparable, Vertex>(val, Vertex(val)));
         return true;
     }
 }
@@ -60,9 +58,9 @@ bool WDGraph<Comparable>::AddEdge(const Comparable &lhs, const Comparable &rhs, 
 template <typename Comparable>
 double WDGraph<Comparable>::GetWeightBetween(const Comparable &lhs, const Comparable &rhs) const {
     if (ContainsVertex(lhs) && ContainsVertex(rhs)) {
-        if (ContainsEdge(lhs, rhs)) {
+        if (ContainsEdge(lhs, rhs))
             return vertices_.find(lhs)->second.adj_l.find(rhs)->second;
-        } else
+        else
             return -1;
     } else
         return -1;
@@ -83,7 +81,7 @@ bool WDGraph<Comparable>::DijkstrasShortestPath(const Comparable &start) {
     sVertex->second.dist = 0;
     pq.push(&sVertex->second);
     
-    for (int i = 1 ; ; ++i) {
+    for ( ; ; ) {
         bool success = false;
         while (!pq.empty() && !success) {
             if (!pq.top()->known)

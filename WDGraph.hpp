@@ -3,7 +3,7 @@
 //  dijkstras-algorithm-xcode
 //
 //  Created by Gil Dekel on 4/26/16.
-//  Last updated by Gil Dekel on 4/27/16.
+//  Last updated by Gil Dekel on 4/29/16.
 //  Copyright © 2016 Gil Dekel. All rights reserved.
 //
 
@@ -18,7 +18,7 @@
 
 /*
  * WDGraph stands for Weighted-Directed graph, which is
- * the requiered data structure for this exercise.
+ * the required data structure for this exercise.
  *
  * --Assumptions--
  * 1) All vertices are unique (i.e. no duplicates).
@@ -33,9 +33,9 @@ const double INF = std::numeric_limits<double>::infinity();     //define infinit
 template <typename Comparable>
 class WDGraph {
 private:
-    // A vertex holds its value and an adjacency list to
-    // represent edges to its neighbors.
-    // Key is the value of the neighbor vertices, and value is the edge's weight.
+    // A vertex holds an adjacency list to represent edges to its neighbors.
+    // Key is the value of the neighbor, and value is the weight of the edge
+    // between this vertex and the neighbor vertex.
     struct Vertex {
         Comparable val;
         Vertex* path;
@@ -50,14 +50,14 @@ private:
     // Comparison class (struct) for the priority queue.
     struct CompareByDist {
         bool operator()(const Vertex *v1, const Vertex *v2) const {
-        
+            
             return (v1->dist > v2->dist);
         }
     };
     
     // The set of vertices searchable by their values.
     std::unordered_map<Comparable, Vertex> vertices_;
-
+    
     // Print the shortest path of the given vertex to the
     // origin, calculated in the last run of DijkstrasShortestPath().
     // param vertex: a pointer to the destiny vertex.
@@ -72,7 +72,7 @@ public:
     WDGraph& operator=(WDGraph &&rhs) = default;
     ~WDGraph() = default;
     
-    // Check if a a certain value is in the graph.
+    // Check if a certain value is in the graph.
     // param val: The Comparable object as a value to search.
     // return: True if the value is already in the graph. False otherwise.
     bool ContainsVertex(const Comparable &val) const;
@@ -110,6 +110,9 @@ public:
     // param start: the origin vertex.
     bool DijkstrasShortestPath(const Comparable &start);
     
+    // This is a wrapper function to the private function
+    // member PrintShortestPathOf(). It takes in a val from
+    // the user and execute a print on vertices pointers.
     // Print the shortest path of the given vertex to the
     // origin, calculated in the last run of DijkstrasShortestPath().
     // param vertex: the destiny vertex.
@@ -117,7 +120,7 @@ public:
     
     // Get the current cost/distance of a vertex to the
     // origin, calculated in the last run of DijkstrasShortestPath().
-    // param vertex: the destiny vertex.
+    // param vertex: the destiny vertex value.
     // return the vertex's dist value. -1 if the value is not in the graph.
     double GetCostOf(const Comparable &val);
     

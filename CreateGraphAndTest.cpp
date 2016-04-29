@@ -3,7 +3,7 @@
 //  dijkstras-algorithm-xcode
 //
 //  Created by Gil Dekel on 4/26/16.
-//  Last updated by Gil Dekel on 4/27/16.
+//  Last updated by Gil Dekel on 4/29/16.
 //  Copyright © 2016 Gil Dekel. All rights reserved.
 //
 
@@ -32,7 +32,7 @@ int main(int argc, char **argv) {
     
     WDGraph<int> testGraph = std::move(parseInputToGraph(argv[1]));
     
-    testGraph.printGraph();
+//    testGraph.printGraph();
     queryGraph(testGraph, argv[2]);
     
     
