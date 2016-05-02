@@ -5,8 +5,8 @@ In this implementation, Dijkstra's algorithm is implemented as a function member
 
 The following assumptions are made:
  
-1) All vertices are unique (i.e. no duplicates).
-2) Weights are non-negative double values. The algorithm will fail if given negative weight values.
+	1) All vertices are unique (i.e. no duplicates).
+	2) Weights are non-negative double values. The algorithm will fail if given negative weight values.
  
 Once Dijkstra is executed on a given vertex (origin), all other vertices are updated to hold their
 current 'travel' cost with respect to the origin vertex. The cost any node node `p` is then easily retrivable via a simple
@@ -29,11 +29,11 @@ my parser not requier n to be stated in the input file.
 
 The next `n` lines represent a node in the following manner:
 
-`<Node1> <Neighbor1> <Weight(Node1, Neighbor1)> <Neighbor2> <Weight(Node1, Neighbor2)> ... <Neighbork> <Weight(Node1, Neighbork)>
-.
-.
-.
-<Node-n> <Neighbor1> <Weight(Node-n, Neighbor1)> <Neighbor2> <Weight(Node-n, Neighbor2)> ... <Neighbork> <Weight(Node-n, Neighbork)>`
+	<Node1> <Neighbor1> <Weight(Node1, Neighbor1)> ... <Neighbork> <Weight(Node1, Neighbork)>
+	.
+	.
+	.
+	<Node-n> <Neighbor1> <Weight(Node-n, Neighbor1)> ... <Neighbork> <Weight(Node-n, Neighbork)>
 
 So, in the given example:
 node 1 is connected to node 2 with a cost of 0.2
@@ -68,15 +68,15 @@ Run:
 ====
 1) `make testGraph ARGS="<GRAPH_INPUT> <GRAPH_QUERY>"` --> To test the graph with an input file and a query file.
 
-e.g. `make testGraph ARGS="Graph1.txt AdjacencyQueries1.txt"`
-to build a graph with Graph1.txt as an input, and query it using AdjacencyQueries1.txt.
+	e.g. `make testGraph ARGS="Graph1.txt AdjacencyQueries1.txt"`
+	to build a graph with Graph1.txt as an input, and query it using AdjacencyQueries1.txt.
 
 2) `make findPath ARGS="<GRAPH_INPUT> <ORIGIN_VERTEX>"` --> To run Dijkstra's algorithm over a graph from an input file, using
 	ORIGIN_VERTEX as the starting vertex.
 
-e.g. `make findPath ARGS="Graph2.txt 1"`
-to build a graph with Graph2.txt as an input, and find all the shortest paths from 1
-to the other vertices.
+	e.g. `make findPath ARGS="Graph2.txt 1"`
+	to build a graph with Graph2.txt as an input, and find all the shortest paths from 1
+	to the other vertices.
 
 NOTE: ARGS' default value is: "Graph1.txt AdjacencyQueries1.txt"
 
