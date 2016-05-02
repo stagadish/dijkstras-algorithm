@@ -29,11 +29,11 @@ my parser not requier n to be stated in the input file.
 
 The next `n` lines represent a node in the following manner:
 
-	<Node1> <Neighbor1> <Weight(Node1, Neighbor1)> ... <Neighbork> <Weight(Node1, Neighbork)>
+	<Node1> <Neighbor1> <Weight(Node1, Neighbor1)> ... <Neighbor-k> <Weight(Node1, Neighbor-k)>
 	.
 	.
 	.
-	<Node-n> <Neighbor1> <Weight(Node-n, Neighbor1)> ... <Neighbork> <Weight(Node-n, Neighbork)>
+	<Node-n> <Neighbor1> <Weight(Node-n, Neighbor1)> ... <Neighbor-k> <Weight(Node-n, Neighbor-k)>
 
 So, in the given example:
 node 1 is connected to node 2 with a cost of 0.2
@@ -82,4 +82,4 @@ NOTE: ARGS' default value is: "Graph1.txt AdjacencyQueries1.txt"
 
 Clean Up:
 =========
-`make clean` - To remove all *.o and executable files.
+`make clean` - To remove all `*.o` and executable files.
