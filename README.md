@@ -1,7 +1,7 @@
 # Dijikstra's Algorithm
 
 This is my implementation of Dijkstra's algorithm, using an undirected, weighted graph.
-In this implementation, Dijkstra's algorithm is implemented as a function member of the graph class.
+In this implementation, Dijkstra's algorithm is implemented as a function member of the graph class `WDGraph`.
 
 The following assumptions are made:
  
@@ -11,6 +11,8 @@ The following assumptions are made:
 Once Dijkstra is executed on a given vertex (origin), all other vertices are updated to hold their
 current 'travel' cost with respect to the origin vertex. The cost any node node `p` is then easily retrivable via a simple
 function call. It is also possible to print the path from the origin to any node `p`.
+
+The following sections explain how to construct input and query files if one is interested in using my makefile.
 
 Input Files:
 ============
