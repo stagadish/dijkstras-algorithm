@@ -23,7 +23,7 @@ An input file should represent a graph in the following manner:
 	4 
 	5 2 10.5 3 13.9
 
-The first line states the number of nodes n (n=5 nodes in this example; Graph1.txt)
+The first line states the number of nodes `n` (`n` = 5 nodes in this example; `Graph1.txt`)
 Note: In my current implementation, this number is not used and I plan on fixing
 my parser not requier n to be stated in the input file.
 
@@ -46,7 +46,7 @@ Query Files:
 ============
 A query file check to see if an edge exists between node i and j.
 The format of a query file is simply pair of integers representing the nodes.
-For example, query file AdjacencyQueries1.txt
+For example, query file `AdjacencyQueries1.txt`
 
 	4 1
 	3 4
@@ -62,16 +62,16 @@ one will exist between node 1 and node 4.
 Compilation:
 ============
 
-`make all` --> To compile all sections.
+`make all` - To compile all sections.
 
 Run:
 ====
-1) `make testGraph ARGS="<GRAPH_INPUT> <GRAPH_QUERY>"` --> To test the graph with an input file and a query file.
+1) `make testGraph ARGS="<GRAPH_INPUT> <GRAPH_QUERY>"` - To test the graph with an input file and a query file.
 
 	e.g. `make testGraph ARGS="Graph1.txt AdjacencyQueries1.txt"`
 	to build a graph with Graph1.txt as an input, and query it using AdjacencyQueries1.txt.
 
-2) `make findPath ARGS="<GRAPH_INPUT> <ORIGIN_VERTEX>"` --> To run Dijkstra's algorithm over a graph from an input file, using
+2) `make findPath ARGS="<GRAPH_INPUT> <ORIGIN_VERTEX>"` - To run Dijkstra's algorithm over a graph from an input file, using
 	ORIGIN_VERTEX as the starting vertex.
 
 	e.g. `make findPath ARGS="Graph2.txt 1"`
@@ -82,4 +82,4 @@ NOTE: ARGS' default value is: "Graph1.txt AdjacencyQueries1.txt"
 
 Clean Up:
 =========
-`make clean` --> To remove all *.o and executable files.
+`make clean` - To remove all *.o and executable files.
